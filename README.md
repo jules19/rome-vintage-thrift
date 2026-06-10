@@ -26,11 +26,10 @@ walk and saved on the phone.
 
 ## Getting it on your iPhone
 
-1. **Host it over HTTPS** — easiest is GitHub Pages:
-   - Repo → *Settings* → *Pages* → *Build and deployment* → Source: **GitHub Actions**.
-   - The included workflow (`.github/workflows/pages.yml`) deploys automatically on
-     push to the default branch. Your app appears at
-     `https://<user>.github.io/rome-vintage-thrift/`.
+1. **Host it over HTTPS** — done via GitHub Pages:
+   - The site is served from the `gh-pages` branch, and the included workflow
+     (`.github/workflows/pages.yml`) mirrors `main` into `gh-pages` on every push.
+   - The app lives at `https://<user>.github.io/rome-vintage-thrift/`.
 2. Open that URL in **Safari** on the iPhone.
 3. Tap **Share → Add to Home Screen**.
 4. Open the app from the Home Screen, go to the **Map** tab and tap
