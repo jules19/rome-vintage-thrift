@@ -50,6 +50,15 @@ const WALK = {
       ]
     },
     {
+      h: "Off the beaten track — where Romans actually shop",
+      p: [
+        "The main loop covers the classic central circuit — small, owner-run shops, but ones that vintage lovers know. For the places with no tourists at all, the map also carries four lettered HIDDEN GEM pins (gold) outside the loop. They are where Romans themselves buy secondhand, and for a dedicated hunter they may be the best part of the trip.",
+        "SUNDAY power move: Porta Portese at 08:30, then after lunch cross town to Borghetto Flaminio (gem A) — a fenced garage-sale market near Piazza del Popolo where well-dressed Roman women sell their own wardrobes. It runs until 19:00, long after Porta Portese has packed up, and the €1.60 entry fee keeps casual tourists out entirely.",
+        "ANY WEEKDAY morning: Via Sannio market (gem B), behind San Giovanni basilica — Rome's everyday secondhand clothes market since the 1950s, Monday to Saturday until early afternoon. Not a word of English, prices like Porta Portese, zero crush. Two metro stops from the start of the walk; do it before stop 1.",
+        "HALF-DAY SIDE QUEST (the deepest cut): San Lorenzo (gem C) and Pigneto (gem D), the student and ex-working-class quarters east of the centre — street art, occupied social centres, Pasolini's old haunts, and the vintage shops Romans keep to themselves. Tram 19 or metro C link them; together they make a perfect second-day mini-crawl of two or three hours."
+      ]
+    },
+    {
       h: "Eat & drink along the way",
       p: [
         "Morning coffee: the bars on Piazza della Madonna dei Monti (stop 1) — order at the counter like a Roman, it's cheaper.",
@@ -95,7 +104,7 @@ const WALK = {
       routeTo: [[41.8946, 12.4913], [41.8944, 12.4910], [41.8950, 12.4907], [41.8958, 12.4903]],
       blurb: "Rome's vintage institution — leather, denim and 70s–90s colour floor to ceiling.",
       story: [
-        "Pifebo is the name Romans say first when you ask where to buy vintage. Founded by three friends and grown into a small empire (this Monti flagship plus branches and a famous pay-by-the-kilo outlet near San Giovanni), it is the city's great democratic vintage warehouse: tomato-red walls, sneakers dangling from the ceiling, and rack after rack of 1970s–1990s stock.",
+        "Pifebo is the name Romans say first when you ask where to buy vintage. Founded by three friends in the student quarter of San Lorenzo (the original shop is still there — see the hidden-gems list), it has grown into a small empire: this Monti flagship, plus a tiny pay-by-the-kilo outpost right next door at No. 141 where the lighter the fabric, the cheaper the haul. Tomato-red walls, sneakers dangling from the ceiling, rack after rack of 1970s–1990s stock.",
         "This is the place for the classics of Italian secondhand: suede and leather jackets, Levi's by the metre, 80s sports jackets, Patagonia fleeces, cowboy boots, and a rotating wall of sunglasses. Stock turns over fast because buyers replenish from huge warehouse stores outside the centre — if you see it and love it, buy it.",
         "You're standing on Via dei Serpenti, 'street of the serpents' — the name probably comes from a long-gone fresco of the Virgin slaying a dragon. Look south down the street: that's the Colosseum closing the view. Not a bad backdrop for trying on a leather trench."
       ],
@@ -439,10 +448,74 @@ const WALK = {
         "The fashion world repaid the debt: Fendi, the Roman house founded as a leather workshop in 1925, funded the fountain's full restoration in 2015 (€2.2 million) and in 2016 staged its 90th-anniversary haute couture show ON the fountain — models walking a transparent runway over the water at sunset. Monuments and maisons keep each other alive here.",
         "Now the ritual, properly: right hand over left shoulder, one coin — returns you to Rome. (Two coins: a new romance; three: marriage. You two are covered, but no harm reinforcing.) The fountain swallows about €1.5 million a year, all collected for the Caritas food programme — your toss feeds someone. From here it's a 15-minute stroll home: up past the Quirinal palace, down Via Nazionale, and back into the lanes of Monti — where a table at Ai Tre Scalini and a glass of Cesanese are waiting. Cin cin: you've earned it twelve kilometres ago."
       ],
-      tip: "Come at 21:00+ and the crowds thin dramatically; November nights can leave you nearly alone with the lit fountain by 22:00. The classic first view is approaching from Via delle Muratte — the roar arrives before the sight."
+      tip: "Full honesty: this is the most touristic spot in Rome, which is exactly why you go at 21:00+ — November nights can leave you nearly alone with the lit fountain by 22:00. If crowds aren't your thing, skip it entirely with a clear conscience and make the wine bar Ai Tre Scalini in Monti your true finale."
     }
   ]
 };
+
+/* ---- Off-loop hidden gems: lettered gold pins, no route line ---- */
+const GEMS = [
+  {
+    id: "gem-borghetto",
+    letter: "A", kind: "gem", emoji: "💎",
+    name: "Borghetto Flaminio — the garage-sale market",
+    addr: "Piazza della Marina 32 (near Piazza del Popolo)",
+    hours: "SUNDAY only, ~10:00–19:00 · entry ~€1.60 · closed mid-July–Aug",
+    coords: [41.9180, 12.4735],
+    blurb: "Romans selling their own wardrobes — the fashion editors' Sunday secret.",
+    story: [
+      "This is the one the guidebooks miss. Since 1994, a fenced yard behind Piazza del Popolo has hosted Rome's only true garage-sale market: the stalls are rented not by professional dealers but by private Romans — very often impeccably dressed signore from the wealthy Flaminio and Parioli districts — selling off their own closets. The result is pre-owned Italian designer clothes, handbags, silk scarves and costume jewellery at jumble-sale prices, sold to you by the woman who wore them to dinner parties in 1985.",
+      "The pedigree is real: it was founded by Enrico Quinto and Paolo Tinarelli, the couple behind one of the world's most important private collections of Italian haute couture (their archive has lent to museum exhibitions), who wanted Rome to have an American-style garage sale. Rome's fashion editors and costume designers quietly shop here on Sunday mornings.",
+      "The small entry fee and total absence of English-language publicity mean you will likely be the only foreigners there. Cash only, gentle haggling expected, and the mix changes every single week because the sellers do."
+    ],
+    tip: "Pair it with the Sunday flip: Porta Portese early, lunch in Trastevere, then tram 2 (from Flaminio metro) or a 10-minute walk from Piazza del Popolo to be here by mid-afternoon — it runs to 19:00, long after every other market is gone."
+  },
+  {
+    id: "gem-sannio",
+    letter: "B", kind: "gem", emoji: "💎",
+    name: "Via Sannio Market",
+    addr: "Via Sannio, behind San Giovanni in Laterano",
+    hours: "Mon–Sat, ~08:00–14:00 (busiest before noon)",
+    coords: [41.8848, 12.5077],
+    blurb: "Rome's everyday secondhand clothes market since the 1950s — zero tourists.",
+    story: [
+      "Every city has a market where its own people buy cheap clothes, and Rome's has run under the Aurelian Walls behind San Giovanni basilica since the 1950s. Via Sannio is the only clothes market in Rome open on WEEKDAYS — which alone makes it precious if your trip misses a Sunday.",
+      "Strategy: the front rows sell cheap new stuff — walk straight past, push to the covered rows at the back and the far end, where the secondhand and vintage dealers live. Leather and shearling jackets are the house speciality, alongside military surplus, denim, furs, and €1–5 rummage bins that reward ten patient minutes. It is Porta Portese's smaller weekday cousin: same prices, none of the crush, and not a word of English spoken.",
+      "You're two metro stops from the walk's start (San Giovanni station, lines A and C, is right there) and beside one of Christianity's great basilicas — San Giovanni in Laterano, the actual cathedral of Rome, which almost no tourist enters. Free, vast, and a genuinely under-visited wonder."
+    ],
+    tip: "Do it as a warm-up: weekday morning at 9:30, an hour of digging, a look inside San Giovanni, then metro or a 25-minute walk to Monti to start the loop. Cash, small notes, and check zips on the leather jackets."
+  },
+  {
+    id: "gem-sanlorenzo",
+    letter: "C", kind: "gem", emoji: "💎",
+    name: "San Lorenzo — Pifebo's original & the student quarter",
+    addr: "Via dei Volsci & Via degli Ausoni, San Lorenzo",
+    hours: "Shops roughly Mon–Sat 10:30–20:00; quarter liveliest from aperitivo hour",
+    coords: [41.8965, 12.5175],
+    blurb: "The ungentrified student quarter where Rome's kilo-vintage scene was born.",
+    story: [
+      "Behind Termini station lies the Rome tourists never see: San Lorenzo, the old railway-workers' quarter, bombed heavily in 1943 and never prettified — a tangle of street art, artisan workshops, occupied social centres and Rome's university crowd. This is where Pifebo opened its original shop on Via dei Volsci, and where vintage-by-the-kilo still works the way it should: huge stock, student prices, no curation theatre.",
+      "Wander Via dei Volsci and Via degli Ausoni and you'll pass secondhand dealers, record shops, bookbinders and ceramicists between political murals — window-shopping here is anthropology. The quarter's centrepiece is the basilica of San Lorenzo fuori le Mura, one of Rome's seven pilgrimage churches, rebuilt after the 1943 bombs fell on it — moving precisely because it's mended, not perfect.",
+      "Come late afternoon: the quarter wakes up at aperitivo hour, and the cheap trattorie and craft-beer bars that feed the student population are the antidote to every tourist-menu in the centro."
+    ],
+    tip: "Combine with Pigneto (gem D) for a half-day east-side crawl — they're 20 minutes apart via tram 19/3 or a walk past Porta Maggiore's astonishing aqueduct junction. Normal big-city wits after dark; it's lively, not polished."
+  },
+  {
+    id: "gem-pigneto",
+    letter: "D", kind: "gem", emoji: "💎",
+    name: "Pigneto — Mademoiselle Vintage & Ttara",
+    addr: "Mademoiselle: Via Alberto da Giussano 62/E · Ttara Romaest: off Via del Pigneto",
+    hours: "Shops roughly Tue–Sun from ~10:30; quarter liveliest afternoon–evening",
+    coords: [41.8880, 12.5235],
+    blurb: "Rome's Kreuzberg: curated vintage in Pasolini's old quarter, far from any tour group.",
+    story: [
+      "Pigneto, a former working-class pocket wedged between two railway lines, is Rome's answer to Berlin's Kreuzberg — low houses, street art, a pedestrian market street, and a creative crowd that moved in when the centre got expensive. Pier Paolo Pasolini shot his first film 'Accattone' here in 1961 and held court at Bar Necci (open since 1924, still wonderful, still doing aperitivo under the fig tree).",
+      "Two vintage stops anchor the visit. Mademoiselle Vintage (Via Alberto da Giussano 62/E, since 2018) is a small, sharply chosen shop of clothing, accessories and footwear picked for quality and uniqueness, at Pigneto prices rather than Monti ones. Ttara Romaest Vintage, near the pedestrian stretch, is the kind of place Romans describe as feeling 'more like a living room than a store' — carefully curated, fair prices, good music, conversation included.",
+      "Browse the daytime market on the pedestrian Via del Pigneto between them, then claim a table at Necci. Metro C (Pigneto station) or tram 19 gets you home."
+    ],
+    tip: "Make this the relaxed second-day afternoon: San Lorenzo first, walk or tram to Pigneto, shop, then aperitivo at Necci dal 1924 — book nothing, rush nothing. That afternoon will out-Rome most of the centro."
+  }
+];
 
 /* Optional return-to-start path drawn after the last stop (closes the loop to Monti). */
 const RETURN_LEG = [
@@ -458,5 +531,6 @@ const KIND_META = {
   market:   { label: "Market",    color: "#d4772f" },
   landmark: { label: "Landmark",  color: "#33658a" },
   food:     { label: "Food stop", color: "#6a8d3f" },
-  finale:   { label: "Finale",    color: "#7b5ea7" }
+  finale:   { label: "Finale",    color: "#7b5ea7" },
+  gem:      { label: "Hidden gem", color: "#b3832f" }
 };

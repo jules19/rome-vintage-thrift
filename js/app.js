@@ -13,6 +13,8 @@
   try { visited = JSON.parse(localStorage.getItem(STORE_VISITED) || "{}"); } catch (e) { visited = {}; }
 
   const stops = WALK.stops;
+  const gems = typeof GEMS !== "undefined" ? GEMS : [];
+  const findStop = (id) => stops.find((x) => x.id === id) || gems.find((x) => x.id === id);
   let currentStop = null;
   let map, meMarker, meCircle, watchId = null;
   const markers = {};
@@ -93,8 +95,8 @@
       color: "#8e2f48", weight: 4, opacity: 0.75, dashArray: "2 7", lineCap: "round"
     }).addTo(map);
 
-    stops.forEach((s) => {
-      const m = L.marker(s.coords, { icon: pinIcon(s), zIndexOffset: 100 + s.n });
+    stops.concat(gems).forEach((s) => {
+      const m = L.marker(s.coords, { icon: pinIcon(s), zIndexOffset: 100 + (s.n || 50) });
       m.on("click", () => openSheet(s.id));
       m.addTo(map);
       markers[s.id] = m;
@@ -105,17 +107,17 @@
 
   function pinIcon(s) {
     const color = KIND_META[s.kind].color;
-    const cls = "stop-pin" + (visited[s.id] ? " visited" : "");
+    const cls = "stop-pin" + (visited[s.id] ? " visited" : "") + (s.letter ? " gem-pin" : "");
     return L.divIcon({
       className: "",
-      html: '<div class="' + cls + '" style="background:' + color + '">' + s.n + "</div>",
+      html: '<div class="' + cls + '" style="background:' + color + '">' + (s.n || s.letter) + "</div>",
       iconSize: [30, 30],
       iconAnchor: [15, 15]
     });
   }
 
   function refreshMarkerStyles() {
-    stops.forEach((s) => markers[s.id] && markers[s.id].setIcon(pinIcon(s)));
+    stops.concat(gems).forEach((s) => markers[s.id] && markers[s.id].setIcon(pinIcon(s)));
   }
 
   $("#btn-fit").addEventListener("click", () => {
@@ -201,6 +203,16 @@
         }
       });
     }
+    // off-loop hidden gems: a small patch around each pin
+    gems.forEach((g) => {
+      for (let z = 13; z <= 17; z++) {
+        const x = lon2tile(g.coords[1], z), y = lat2tile(g.coords[0], z);
+        const r = z >= 16 ? 2 : 1;
+        for (let dx = -r; dx <= r; dx++) for (let dy = -r; dy <= r; dy++) {
+          set.add(z + "/" + (x + dx) + "/" + (y + dy));
+        }
+      }
+    });
     return Array.from(set);
   }
 
@@ -247,39 +259,49 @@
   }
 
   /* ---------- stops list ---------- */
+  function stopCard(s, legHtml) {
+    const li = document.createElement("li");
+    li.className = "stop-card" + (visited[s.id] ? " visited" : "");
+    li.innerHTML =
+      '<div class="stop-badge" style="background:' + KIND_META[s.kind].color + '">' + (s.n || s.letter) + "</div>" +
+      '<div class="stop-card-body">' +
+        legHtml +
+        '<span class="kind-chip" style="background:' + KIND_META[s.kind].color + '">' + KIND_META[s.kind].label + "</span>" +
+        "<h3>" + s.emoji + " " + s.name + "</h3>" +
+        "<p>" + s.blurb + "</p>" +
+      "</div>" +
+      '<button class="stop-check' + (visited[s.id] ? " on" : "") + '" aria-label="Mark visited">✓</button>';
+    li.addEventListener("click", (e) => {
+      if (e.target.classList.contains("stop-check")) {
+        visited[s.id] = !visited[s.id];
+        if (!visited[s.id]) delete visited[s.id];
+        saveVisited();
+      } else {
+        openSheet(s.id);
+      }
+    });
+    return li;
+  }
+
   function renderStopsList() {
     const ol = $("#stops-list");
     ol.innerHTML = "";
     stops.forEach((s) => {
-      const li = document.createElement("li");
-      li.className = "stop-card" + (visited[s.id] ? " visited" : "");
-
       const legM = s.routeTo && s.routeTo.length > 1 ? pathLength(s.routeTo.concat([s.coords])) : 0;
       const legHtml = s.n === 1
         ? '<p class="leg">Start of the loop</p>'
         : '<p class="leg">' + fmtDist(legM) + " from previous stop</p>";
-
-      li.innerHTML =
-        '<div class="stop-badge" style="background:' + KIND_META[s.kind].color + '">' + s.n + "</div>" +
-        '<div class="stop-card-body">' +
-          legHtml +
-          '<span class="kind-chip" style="background:' + KIND_META[s.kind].color + '">' + KIND_META[s.kind].label + "</span>" +
-          "<h3>" + s.emoji + " " + s.name + "</h3>" +
-          "<p>" + s.blurb + "</p>" +
-        "</div>" +
-        '<button class="stop-check' + (visited[s.id] ? " on" : "") + '" aria-label="Mark visited">✓</button>';
-
-      li.addEventListener("click", (e) => {
-        if (e.target.classList.contains("stop-check")) {
-          visited[s.id] = !visited[s.id];
-          if (!visited[s.id]) delete visited[s.id];
-          saveVisited();
-        } else {
-          openSheet(s.id);
-        }
-      });
-      ol.appendChild(li);
+      ol.appendChild(stopCard(s, legHtml));
     });
+
+    if (gems.length) {
+      const div = document.createElement("li");
+      div.className = "gems-divider";
+      div.innerHTML = "<h2>💎 Hidden gems — off the loop</h2>" +
+        "<p>Where Romans actually shop secondhand. Not on the walking route — see the Guide tab for how to slot them in.</p>";
+      ol.appendChild(div);
+      gems.forEach((g) => ol.appendChild(stopCard(g, '<p class="leg">Off the loop · short tram or metro ride</p>')));
+    }
   }
 
   /* ---------- guide ---------- */
@@ -308,10 +330,10 @@
 
   /* ---------- bottom sheet ---------- */
   function openSheet(id) {
-    const s = stops.find((x) => x.id === id);
+    const s = findStop(id);
     if (!s) return;
     currentStop = s;
-    $("#sheet-badge").textContent = s.n;
+    $("#sheet-badge").textContent = s.n || s.letter;
     $("#sheet-badge").style.background = KIND_META[s.kind].color;
     $("#sheet-kind").textContent = KIND_META[s.kind].label;
     $("#sheet-kind").style.background = KIND_META[s.kind].color;
@@ -326,6 +348,9 @@
     if (s.detour) { dBox.hidden = false; $("#sheet-detour").textContent = s.detour; }
     else { dBox.hidden = true; }
     syncSheetVisitedBtn();
+    const isGem = !s.n;
+    $("#sheet-prev").style.visibility = isGem ? "hidden" : "visible";
+    $("#sheet-next").style.visibility = isGem ? "hidden" : "visible";
     $("#sheet-prev").disabled = s.n === 1;
     $("#sheet-next").disabled = s.n === stops.length;
     $("#sheet").hidden = false;

@@ -2,7 +2,7 @@
    Shell: precached at install (app works fully offline).
    Map tiles: cache-first with network fill (tile.openstreetmap.org). */
 
-const VERSION = "v1.0.0";
+const VERSION = "v1.1.0";
 const SHELL_CACHE = "rvl-shell-" + VERSION;
 const TILE_CACHE = "rvl-tiles-v1"; // survives app updates
 const TILE_HOST = "tile.openstreetmap.org";

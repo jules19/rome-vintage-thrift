@@ -5,7 +5,9 @@ works **fully offline on an iPhone**.
 
 One ~12.5 km loop · 23 stops · Monti → the Imperial Fora → Centro Storico →
 the Jewish Ghetto → Trastevere → Porta Portese → back past the Pantheon and
-the Trevi Fountain.
+the Trevi Fountain. Plus **4 off-loop "hidden gem" pins** — Borghetto Flaminio,
+Via Sannio market, San Lorenzo and Pigneto — the locals-only secondhand spots
+beyond the tourist circuit.
 
 Every stop has the full story (why the shop matters, the history under your feet),
 an insider tip, opening hours, and a pin on the map. Progress is ticked off as you

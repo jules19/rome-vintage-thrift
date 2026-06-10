@@ -211,6 +211,10 @@ main { flex: 1 1 auto; position: relative; overflow: hidden; }
   align-self: center;
 }
 .stop-check.on { background: var(--teal); border-color: var(--teal); color: #fff; }
+.gems-divider { padding: 18px 6px 6px; }
+.gems-divider h2 { margin: 0 0 4px; font-family: Georgia, serif; font-size: 19px; color: #8a6420; }
+.gems-divider p { margin: 0; font-size: 13px; color: var(--ink-soft); line-height: 1.4; }
+.stop-pin.gem-pin { border-style: dashed; }
 
 .kind-chip {
   display: inline-block;
